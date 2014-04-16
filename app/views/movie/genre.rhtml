@@ -1,0 +1,80 @@
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 class="block-head">Genres</h4>
+          <ul class="categories">
+<% for category in @categories 
+            str = '';
+            if params[:id].to_i == category.id.to_i
+                str = 'active'
+            end
+           if category.id == 6
+               str << ' longer';
+           elsif category.id == 7
+               str << ' shorter';
+           end
+%>
+            <li class="<%= str %>">
+    <%= link_to category.category.upcase, {:controller=>"movie",:action=>"catsearch",:id => category.id},{:class=>"white"} %>
+            </li>
+<% end %>
+          </ul>
+
+
+<!-- movies -->
+
+<% if @movies != nil && @movies.size > 0 %>
+          <div class="row">
+            <div class="col-xs-12">
+              <ul class="genres">
+     <% for movie in @movies 
+        genre = "";
+        for c in movie.categories
+            genre << c.category.capitalize << ", "
+        end
+        genre = genre.chomp(", ")
+     %>
+                <li class="movie_thumbs">
+                  <img src="/images/pics_movies/med/<%= movie.postermed %>" alt="<%= movie.title.titleize %>">
+                  <p class="title"><%= movie.title %></p>
+                  <p class="<%= genre %>"></p>
+        <% if movie.truncated == true  %>
+                <p class="desc"><%= smart_truncate(movie.synopsis, :words => 17)  %></p>
+        <% else %>
+                <p class="desc"><%= smart_truncate(movie.synopsis, :words => 21) %></p>
+        <% end %>
+
+                  <a href="/movie/view/<%= movie.id %>">More Info</a>
+                </li>
+    <% end %>
+              </ul>
+            </div>
+          </div>
+<% else  %>
+
+NO MOVIES!
+
+<% end %>
+<!-- end movies -->
+
+<!-- pagination bar -->
+
+
+      <div class="row">
+        <div class="col-xs-12 text-center">
+            <% if( params[:action] == "catsearch" ) %>
+                <%= paginate2("/movie/catsearch/"+params[:id]+"?",@page,@perpage,@count) %>
+            <% else %>
+                <%= paginate2("/movie/index_new/?",@page,@perpage,@count) %>
+            <% end %>
+        </div>  
+      </div>
+
+<!-- end pagination bar -->
+
+
+
+        </div>
+      </div>
+
+

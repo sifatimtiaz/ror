@@ -1,0 +1,33 @@
+ <h1>New Release Order</h1>
+<p>
+ <b>Movies:</b><br/>
+ <div class="wrapper">
+ <div class="leftSideRo">
+ <% @movies.each do |movie| %>
+ <%= link_to 'Add', :action => 'add', :id => movie %> || <%= link_to movie.title, :action => 'add', :id => movie %></a><br />
+ <% end %>
+</div>
+<div class="rightSideRo">
+<%= form_tag "/admin/releaseorder/update_order/", :multipart => true, :id =>'update_order', :name =>'update_order' %>
+  Priority Level :: Movie Title
+  <table cellpadding="0" cellspacing="0" border="0" width="300">
+  <% @releaseorders.each do |releaseorder| %>
+  <tr class="<%= cycle("even", "odd") -%>">
+  <td><input type="text" value="<%=releaseorder.order_list %>" readonly="readonly" size="1" name="order_list" /> <%=releaseorder.title %><br /></td>
+  <td><%= link_to 'Edit', :action => 'edit_order', :id => releaseorder.id %></td>
+  <td><input type="hidden" value="<%=releaseorder.id %>" name="id" /><%= link_to 'Remove', :action => 'destroy', :id => releaseorder.id %></td>
+   </tr>
+   <% end %>
+    </table>
+   <br />
+<%= end_form_tag %>
+ </div>
+
+ </p>
+</div>
+
+
+<div class="solidDiv">
+
+</div>
+

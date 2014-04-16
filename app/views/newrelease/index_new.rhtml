@@ -1,0 +1,37 @@
+<%#= @movies.inspect %>
+<%= render :partial => "shared/billboard", :locals => { :banners=> @banners } %>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 class="block-head">New Releases</h4>
+          <ul class="new_releases">
+
+
+<% for movie in @movies 
+        genre = "";
+	for c in movie.categories
+	    genre << c.category.capitalize << ", "
+	end
+	genre = genre.chomp(", ")
+%>
+            <li class="movie_thumbs">
+              <a href="/movie/view/<%= movie.id %>">
+                  <img src="/images/pics_movies/med/<%= movie.postermed %>" alt="<%= movie.title.titleize %>">
+              </a>
+              <p class="title"><%= movie.title.titleize %></p>
+              <p class="genre"><%= genre %></p>
+              <p class="desc">
+<% if movie.truncated == true  %>
+		<%= smart_truncate(movie.synopsis, :words => 17)  %>
+<% else %>
+		<%= smart_truncate(movie.synopsis, :words => 21) %>
+<% end %>
+              </p>
+              <a href="/movie/view/<%= movie.id %>">More Info</a>
+            </li>
+<% end %>
+          </ul>
+        </div>
+      </div>
+
+

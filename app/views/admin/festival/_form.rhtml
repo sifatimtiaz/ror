@@ -1,0 +1,35 @@
+<%= error_messages_for 'festival' %>
+
+<!--[form:festival]-->
+<p><label for="festival_title">Title</label><br/>
+<%= text_field 'festival', 'title'  %></p>
+
+<p><label for="festival_subtitle">Dates</label><br/>
+<%= text_field 'festival', 'subtitle'  %></p>
+
+<p><label for="festival_description">Description</label><br/>
+<%= text_area 'festival', 'description'  %></p>
+
+<p><label for="festival_festivaldate">Fesitval Date</label><br/>
+<%= date_select 'festival', 'festivaldate', :use_month_numbers => true, :order => [:year,:month,:day]  %>
+</p>
+
+<p><label for="festival_thumbnail">Thumbnail</label><br/>
+<input type="file" name="thumbfile" value=""/>
+<%= hidden_field 'festival', 'imagesmall'  %>
+<%= hidden_field 'festival', 'imagelarge'  %>
+</p>
+
+<% if( @festival.imagelarge != nil && @festival.imagelarge != "" ) %>
+<p>
+	<img src="/images/pics_festivals/<%= @festival.imagesmall %>" border="0" style="padding: 10px;"/>	
+</p>
+<% end %>
+
+<p><label for="festival_link">Link</label><br/>
+<%= text_field 'festival', 'link' %></p>
+
+
+
+<!--[eoform:festival]-->
+

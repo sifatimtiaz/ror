@@ -1,0 +1,10 @@
+<h1>Editing event</h1>
+
+<!-- <%= start_form_tag :action => 'update', :id => @event %> -->
+<%= form_tag "/admin/event/update/"+params[:id], :multipart => true %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @event %> |
+<%= link_to 'Back', :action => 'list' %>

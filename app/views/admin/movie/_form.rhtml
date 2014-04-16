@@ -1,0 +1,58 @@
+<%= error_messages_for 'movie' %>
+
+<!--[form:movie]-->
+<p><label for="movie_title">Title</label><br/>
+<%= text_field 'movie', 'title'  %></p>
+
+<p><label for="movie_synopsis">Synopsis</label><br/>
+<%= text_area 'movie', 'synopsis', :rows => 5  %></p>
+
+<p><label for="movie_cast">Cast</label><br/>
+<%= text_area 'movie', 'cast', :rows => 5  %></p>
+
+<p><label for="movie_director">Director</label><br/>
+<%= text_field 'movie', 'director'  %></p>
+
+<p><label for="movie_link">Link</label><br/>
+<%= text_field 'movie', 'link'  %></p>
+<p><%= text_field 'movie', 'link2'  %></p>
+<p><%= text_field 'movie', 'link3'  %></p>
+
+<p><label for="movie_screener">Screener Link</label><br/>
+<%= text_field 'movie', 'screener'  %></p>
+
+<p><label for="movie_posterlarge">Posterlarge</label><br/>
+<input type="file" name="imagelarge" value=""/>
+<%= hidden_field 'movie', 'posterlarge'  %></p>
+<% if @movie.postersmall != nil && @movie.postersmall != '' %>
+	<p><img src="/images/pics_movies/<%= @movie.postersmall %>"></p>
+<% end %>
+<!-- <p><label for="movie_postersmall">Postersmall</label><br/>
+<%= hidden_field 'movie', 'postersmall'  %></p>
+ -->
+
+<p><label for="movie_trailer">Trailer</label><br/>
+<%= text_field 'movie', 'trailer'  %></p>
+
+<p><label for="movie_releasedate">Releasedate</label><br/>
+<%= date_select 'movie', 'releasedate', :use_month_numbers => true, :order => [:year,:month,:day]  %></p>
+
+<p><label for="movie_length">Length</label><br/>
+<%= text_field 'movie', 'length', :size=>3  %></p>
+
+<p><label for="movie_categories">Categories</label><br/>
+<%= 
+	mc = Array.new( @movie.categories.size )
+	@movie.categories.collect { |c| 
+		if(c.id != nil) 
+			mc.push(c.id) 
+		end 
+	}
+	select_tag 'categories[]',
+	# options_for_select( Category.find(:all,:order=>"category ASC").collect { |c| [ c.category, c.id] }, @movie.categories.collect { |mc| [mc.category,mc.id] } ),
+	options_from_collection_for_select( Category.find(:all,:order=>"category ASC").collect, "id","category", mc  ),
+	{ :multiple => true, :size => 10 }
+%>
+</p>
+<!--[eoform:movie]-->
+

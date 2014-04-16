@@ -1,0 +1,51 @@
+<%
+if @preleases.date != nil
+    d = @preleases.date.to_formatted_s(:rfc822)
+    arr = d.split("-")
+    d = arr[1] + '.' + arr[2] + '.' + arr[0]
+else
+    d = '?.?.?'
+end
+%>
+      <div class="row">
+        <div class="col-xs-12 about">
+            <h4 class="block-head">Press Releases</h4>
+            <div style="text-align:center;">
+              <h5><b><%= d %></b> 
+              <h5 style="color:#348cf2;font-weight:600;"><%= @preleases.title %></h5>
+              <h5><%= @preleases.subtitle %></h5>
+            </div>
+              <br>
+<p>
+
+              <% if @preleases.body.index(/\n/) != nil %>
+                  <%= @preleases.body.gsub!(/\n/,'<br/>') %>
+              <% else %>
+                  <%= @preleases.body %>
+              <% end %>
+
+</p>
+            </h5>
+            <p>
+            <% if @preleases.sbody.index(/\n/) != nil %>
+                    <strong><%= @preleases.stitle %></strong><br />
+                     <%= @preleases.byline %><br />
+                      <%= @preleases.sdate %><br /><br />
+                    <%= @preleases.sbody.gsub!(/\n/,'<br/>') %>
+            <% else %>
+                    <strong><%= @preleases.stitle %></strong><br />
+                     <br />
+                    <%= @preleases.byline %><br /><br />
+                    <%= @preleases.sbody %>
+            <% end %>
+            </p>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 about" style="padding-left:14px;">
+            <p><a href="/prelease">See All Press Releases</a></p>
+        </div>
+      </div>
+

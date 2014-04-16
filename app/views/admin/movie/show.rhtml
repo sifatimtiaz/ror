@@ -1,0 +1,29 @@
+<h1>Movie: <%= @movie.title %></h1>
+
+<p><b>Synopsis:</b> <%= @movie.synopsis.index(/\n/) != nil ? @movie.synopsis.gsub(/\n/,"<br/><br/>") : @movie.synopsis %></p>
+<p><b>Cast:</b> <%= @movie.cast.index(/\n/) != nil ? @movie.cast.gsub(/\n/,"<br/>") : @movie.cast %> </p>
+<p><b>Director:</b> <%= @movie.director %></p>
+<p><b>Link:</b> <%= @movie.link %><% if (@movie.link2 != nil && @movie.link2 != '') %><br /><%= @movie.link2 %><% end %>
+<% if (@movie.link3 != nil && @movie.link3 != '') %><br /><%= @movie.link3 %><% end %>
+</p>
+<p><b>Release date:</b> <%= @movie.releasedate %></p>
+<p><b>Length:</b> <%= @movie.length %></p>
+	<p><b>Categories:</b> <br/>
+	<% if @movie.categories.size > 0 %>
+
+		<% for category in @movie.categories %> 
+		   	<div class="color_square" style="background-color: #<%= category.color %>"></div>&nbsp; <%=category.category%>
+		   <br/>
+		<% end %>
+
+	<% else %>
+		<p>No categories have been assigned.</p>
+	<% end %>
+	</b>
+<p>
+<p><b>Trailer:</b> <%= @movie.trailer %></p>
+	<%= @movie.posterlarge != nil ? "<img src=\"/images/pics_movies/"+@movie.posterlarge+"\" />" : "" %>
+	<%= @movie.postersmall != nil ? "<img src=\"/images/pics_movies/"+@movie.postersmall+"\" />" : "" %>
+</p>
+<%= link_to 'Edit', :action => 'edit', :id => @movie %> |
+<%= link_to 'Back', :action => 'list' %>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Lightning  Entertainment: Admin</title>
+<link rel="stylesheet" href="/admin/stylesheets/stylesAdmin.css"></link>
+<script type="text/JavaScript" src="/admin/javascripts/prototype.js"></script>
+<script type="text/JavaScript" src="/admin/javascripts/custom.js"></script>
+<script type="text/JavaScript" src="/admin/javascripts/navigation.js"></script>
+</head>
+<body>
+<!-- begin main -->
+<div class="main">
+
+ <!-- begin inner main -->
+ <div class="mainwrapper">
+ 
+  <!-- begin header and navigation -->
+  <div class="mainnav">
+  <a href="/admin/index" title="Lightning Entertainment home"><img src="/images/nav_top.jpg" width="772" height="82" border="0" alt="Lightning Entertainment home"/></a>
+ <div class="mainnav_links">
+  	<!-- begin navigation wrapper -->
+	<div id="adminNavWrapper">
+		<div id="homeLnk"><div id="homeLnkSelect"><a href="/admin/index">Home</a></div>
+		</div>
+  		<div id="movies_nav">
+  			<div id="selectMovies"><a href="/admin/movie/list">Movie</a></div>
+				<div id="moviesSubNav"><a href="/admin/movie/new" class="movies_nav">add new movie</a> | <a href="/admin/category" class="movies_nav">categories</a> | <a href="/admin/movie/list" class="movies_nav">list movies</a> | <a href="/admin/releaseorder" class="movies_nav">release order</a></div>
+		</div>
+		<div id="emails_nav"><div id="selectEmails"><a href="#" id="chEmails">Tools</a></div>
+		<div id="emailsSubNav"><a href="/admin/banner" class="movies_nav">banners</a> | <a href="/admin/companyprofile" class="movies_nav">about</a> | <a href="/admin/contact" class="movies_nav">contacts</a> | <a href="/admin/email" class="movies_nav">emails</a> | <a href="/admin/event" class="movies_nav">events</a> | <a href="/admin/registration" class="movies_nav">registrations</a> | <a href="/admin/question" class="movies_nav">user comments</a></div>
+		</div>
+		<div id="singleLnk"><div id="singleLnkSelect"><a href="/admin/prelease">Press Releases</a></div>
+		</div>
+		<div id="festLnk"><div id="festLnkSelect"><a href="/admin/festival">Festivals</a></div>
+		</div>		
+	<!-- end navigation wrapper -->
+	</div>
+	<!-- end navigation wrapper -->
+	</div>
+  <!-- end mainnav_links div -->
+  	</div>
+	<!-- begin body -->
+	<div class="body">
+
+		<%= @content_for_layout %>		
+
+	</div>
+	<!-- end body -->
+	<div class="clear">&nbsp;</div>
+	<div class="clear">&nbsp;</div>
+	<div class="mainnav_links">
+  	<!-- begin navigation wrapper -->
+	<div id="adminNavWrapper">
+		<div id="homeLnkFoot"><div id="homeLnkSelectFoot"><a href="/admin/index">Home</a></div>
+		</div>
+  		<div id="moviesFoot_nav">
+  			<div id="selectFootMovies"><a href="/admin/movie/list">Movie</a></div>
+				<div id="moviesFootSubNav"><a href="/admin/movie/new" class="movies_nav">add new movie</a> | <a href="/admin/category" class="movies_nav">categories</a> | <a href="/admin/movie/list" class="movies_nav">list movies</a> | <a href="/admin/releaseorder" class="movies_nav">release order</a></div>
+		</div>
+		<div id="emailsFoot_nav"><div id="selectFootEmails"><a href="#" id="chEmails">Tools</a></div>
+		<div id="emailsFootSubNav"><a href="/admin/banner" class="movies_nav">banners</a> | <a href="/admin/companyprofile" class="movies_nav">company profile</a> | <a href="/admin/contact" class="movies_nav">contacts</a> | <a href="/admin/email" class="movies_nav">emails</a> | <a href="/admin/event" class="movies_nav">events</a> | <a href="/admin/registration" class="movies_nav">registrations</a> | <a href="/admin/question" class="movies_nav">user comments</a></div>
+		</div>
+		<div id="singleLnkFoot"><div id="singleLnkSelectFoot"><a href="/admin/prelease">Press Releases</a></div>
+		</div>
+		<div id="festLnkFoot"><div id="festLnkSelectFoot"><a href="/admin/festival">Festivals</a></div>
+		</div>		
+	<!-- end navigation wrapper -->
+	</div>
+	<!-- end navigation wrapper -->
+	</div>
+  <!-- end mainnav_links div -->
+  	</div>
+ </div>
+ <!-- end inner main -->
+ 
+</div>
+<!-- end main -->
+</body>
+</html>

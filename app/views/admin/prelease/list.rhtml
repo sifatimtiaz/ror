@@ -1,0 +1,18 @@
+<h1>Press Releases</h1>
+
+<table>
+  
+<% for preleases in @preleases %>
+  <tr>
+  <td><%= preleases.title %></td>
+  
+    <td><%= link_to 'Show', :action => 'show', :id => preleases %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => preleases %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => preleases }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Press Release', :action => 'new' %>

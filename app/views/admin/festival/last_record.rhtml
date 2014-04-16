@@ -1,0 +1,77 @@
+ <h1>Festivals</h1>
+<p>
+ <b>Festivals:</b><br/>
+ <div class="wrapper">
+ <div>
+ <% @festivals.each do |festival| %>
+ <%= festival.title %><br>
+ <%= festival.subtitle %>
+
+</div>
+<br />
+Add movies to this festival
+<br /><br />
+<div class="leftSideRo">
+	
+<% @movies.each do |movie| %>
+ <a href="/admin/festivalmovie/add_movie?movie_id=<%= movie.id %>&festival_id=<%=params[:festival_id]%>" />Add</a> || <a href="/admin/festivalmovie/add_movie?movie_id=<%= movie.id %>&festival_id=<%=params[:festival_id]%>" /><%= movie.title %></a><br />
+  <% end %>
+ <% end %>
+</div>
+<div class="rightSideRo">
+  <% @festout.each do |fest| %>
+ <table cellpadding="0" cellspacing="0" border="0" width="250">
+  		<tr>
+  			<td width="80px"><img src="/images/pics_movies/<%= fest.postersmall %>" /></td>
+			<td valign="top"><%= fest.title %><br /> <a href="/admin/movietime/new?movie_id=<%= fest.movie_id %>&festival_id=<%= fest.festival_id %>" />ADD MOVIE TIMES</a><br /><a href="/admin/festivalmovie/destroy/<%= fest.id %>">REMOVE MOVIE</a><br /></td>
+  		</tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="0" width="400">
+		<tr>
+			<td width="140px"><strong>Date:</strong></td>
+			<td width="60px"><strong>Time:</strong></td>
+			<td width="130"><strong>Location:</strong></td>
+			<td width="30px"></td>
+			<td width="40px">&nbsp;</td>
+		</tr>
+	</table>
+	<% for movietime in @movietimes %>
+			<% if( movietime.movie_id == fest.movie_id) %>
+			<table cellpadding="0" cellspacing="0" border="0" width="400">
+				<tr class="<%= cycle("even", "odd") -%>">
+ 					<td width="140px"><%=movietime.date%></td>
+					<td width="60px"><%=movietime.time%></td>
+					<td width="100px"><%=movietime.location%></td>
+					<td width="30px"><% if( movietime.map == nil || movietime.map == "")%>
+							
+						<% else 
+
+						if( movietime.map != nil )
+						
+						@showmap = "<a href=\"#{movietime.map}\" target=\"_blank\">map</a> ||"
+						end
+						%>	
+						<%= @showmap %>
+						<%end%></td>
+					<td width="70px"><a href="/admin/movietime/edit/<%= movietime.id %>?movie_id=<%= movietime.movie_id %>">edit</a> || <a href="/admin/movietime/destroy/<%= movietime.id %>">remove</a></td>
+ 				</tr>
+			</table>
+			<% end %>
+			<% end %>
+	<br /><br />
+	<%end%>
+	
+
+</div>
+
+
+</div>
+
+
+<div class="solidDiv">
+	
+
+			
+			
+</div>
+

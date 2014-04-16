@@ -1,0 +1,57 @@
+<!-- begin main column -->
+<div class="maincol">
+	<h1>Listing emails</h1>
+
+	<table>
+	  <tr>
+	  <% for column in Email.content_columns %>
+	    <th><%= column.human_name %></th>
+	  <% end %>
+	  </tr>
+	  
+  <% if @emails.size > 0 %>
+	<% for email in @emails %>
+	  <tr>
+	  <% for column in Email.content_columns %>
+	    <td><%=h email.send(column.name) %></td>
+	  <% end %>
+	    <td><%= link_to 'Edit', :action => 'edit', :id => email %></td>
+	    <td><%= link_to 'Destroy', { :action => 'destroy', :id => email }, :confirm => 'Are you sure?', :post => true %></td>
+	  </tr>
+	<% end %>
+  <% else %>
+    <tr><td colspan="2"><p>No emails submitted.</p></td></tr>
+  <% end %>	
+	</table>
+	
+	<%= link_to 'Previous page', { :page => @email_pages.current.previous } if @email_pages.current.previous %>
+	<%= link_to 'Next page', { :page => @email_pages.current.next } if @email_pages.current.next %> 
+
+</div>
+<!-- end main column -->
+
+<!-- begin right column -->
+<div class="rightcol">
+
+	<p><b>search for an email:</b> <%= @search_results %></p>
+	<%= start_form_tag :action => 'search' %>	
+		<p><input type="text" name="search" value=""/> <input type="submit" name="submit" value="search"/>
+		</p>
+		
+	<%= end_form_tag %>
+	
+	<br/><br/>
+	
+	<p><b><%= @form_action %> email</b></p>
+	<%= start_form_tag :action => @form_action, :id => @form_id %>
+	  <%= render :partial => 'form' %>
+	  <%= submit_tag "update" %>
+	<%= end_form_tag %>
+	
+</div>
+<!-- end right column -->
+
+<%= 
+  # self.inspect 
+  # params.inspect
+%>

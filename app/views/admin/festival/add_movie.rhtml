@@ -1,0 +1,30 @@
+ <h1>Festivals</h1>
+<p>
+ <b>Festivals:</b><br/>
+ <div class="wrapper">
+ <div>
+ <% @festivals.each do |festival| %>
+ <%= festival.title %><br>
+ <%= festival.subtitle %>
+ 
+</div>
+<br />
+Add movies to this festival
+<br /><br />
+<div class="leftSideRo">
+<% @filmlast.each do |filmlastrecord| %>
+ <%= filmlastrecord.id %><br>
+ <%= filmlastrecord.movie_id %>
+ <% end %>
+ <% end %>
+</div>
+
+
+
+</div>
+
+
+<div class="solidDiv">
+
+</div>
+

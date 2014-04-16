@@ -1,0 +1,6 @@
+*.tar
+*.gz
+pics_events/**.*
+pics_festivals/**.*
+pics_movies/**.*
+.svn

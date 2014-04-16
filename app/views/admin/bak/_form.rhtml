@@ -1,0 +1,50 @@
+<%= error_messages_for 'festival' %>
+
+<!--[form:festival]-->
+<p><label for="festival_title">Title</label><br/>
+<%= text_field 'festival', 'title'  %></p>
+
+<p><label for="festival_subtitle">Subtitle</label><br/>
+<%= text_field 'festival', 'subtitle'  %></p>
+
+<p><label for="festival_shortdesc">Shortdesc</label><br/>
+<%= text_field 'festival', 'shortdesc'  %></p>
+
+<p><label for="festival_description">Description</label><br/>
+<%= text_area 'festival', 'description'  %></p>
+
+<p><label for="festival_festivaldate">Fesitval Date</label><br/>
+<%= date_select 'festival', 'festivaldate', :use_month_numbers => true, :order => [:year,:month,:day]  %>
+</p>
+
+<p><label for="festival_thumbnail">Thumbnail</label><br/>
+<input type="file" name="thumbfile" value=""/>
+<%= hidden_field 'festival', 'imagesmall'  %>
+<%= hidden_field 'festival', 'imagelarge'  %>
+</p>
+
+<% if( @festival.imagelarge != nil && @festival.imagelarge != "" ) %>
+<p>
+	<img src="/images/pics_festivals/<%= @festival.imagesmall %>" border="0" style="padding: 10px;"/>	
+</p>
+<% end %>
+
+<p><label for="festival_link">Link</label><br/>
+<%= text_field 'festival', 'link' %></p>
+
+<p><label for="festival_movies">Movies</label><br/>
+<%= 
+	mc = Array.new( @festival.movies.size )
+	@festival.movies.collect { |c| 
+		if(c.id != nil) 
+			mc.push(c.id) 
+		end 
+	}
+	select_tag 'movies[]',
+	options_from_collection_for_select( Movie.find(:all,:order=>"title ASC").collect, "id","title", mc  ),
+	{ :multiple => true, :size => 10 }
+%>
+</p>
+
+<!--[eoform:festival]-->
+

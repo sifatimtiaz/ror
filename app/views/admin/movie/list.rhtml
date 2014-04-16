@@ -1,0 +1,33 @@
+<h1>Movie Listings</h1>
+<%= link_to 'Add New Movie', :action => 'new' %>
+<br /><br />
+<table width="700px" cellspacing="0" cellpadding="2" border="0">
+  <tr>
+  <th>Title</th>
+  <th>Director</th>
+  <th>Release Date</th>
+  <th>Length</th>
+  <th colspan="3">&nbsp;</th>
+  </tr>
+  
+<% for movie in @movies %>
+  <tr class="<%= cycle("even", "odd") -%>">
+
+	<td><%= movie.title %></td>
+	<td><%= movie.director %></td>
+	<td><%= movie.releasedate %></td>
+	<td><%= movie.length %></td>
+	
+    <td><a href="/movie/view/<%= movie.id %>" target="_blank>Show">Show</a></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => movie %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => movie }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+<br /><br />
+<%= pagination_links(@movie_pages) %><br />
+<%= link_to 'Previous page', { :page => @movie_pages.current.previous } if @movie_pages.current.previous %>
+<%= link_to 'Next page', { :page => @movie_pages.current.next } if @movie_pages.current.next %> <br />
+
+
+<br />

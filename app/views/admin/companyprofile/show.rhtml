@@ -1,0 +1,7 @@
+<h1>Company Profile</h1>
+
+<p><b><%= @companyprofile.title %></b></p>
+<p><%= @companyprofile.synopsis.gsub(/\n/,"<br/>") %></p>
+
+<%= link_to 'Edit', :action => 'edit', :id => @companyprofile %>
+

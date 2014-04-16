@@ -1,0 +1,12 @@
+config/routes.rb
+
+app/
+    views/
+    controllers/
+    helpers/
+    models/
+public/
+    css/
+    js/
+    images/
+

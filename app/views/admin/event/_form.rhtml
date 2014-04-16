@@ -1,0 +1,24 @@
+<%= error_messages_for 'event' %>
+
+<!--[form:event]-->
+<p><label for="event_title">Title</label><br/>
+<%= text_field 'event', 'title'  %></p>
+
+<p><label for="event_description">Description</label><br/>
+<%= text_area 'event', 'description'  %></p>
+
+<p><label for="event_imagelarge">Image</label><br/>
+<input type="file" name="thumbfile" value=""/>
+<%= hidden_field 'event', 'imagelarge'  %></p>
+
+<% if( @event.imagelarge != nil && @event.imagelarge != "" ) %>
+<p>
+	<img src="/images/pics_events/<%= @event.imagesmall %>" border="0" style="padding: 10px;"/>	
+</p>
+<% end %>
+
+<p><label for="event_eventdate">Event Date</label><br/>
+<%= date_select 'event', 'eventdate', :use_month_numbers => true, :order => [:year,:month,:day]  %>
+</p>
+<!--[eoform:event]-->
+

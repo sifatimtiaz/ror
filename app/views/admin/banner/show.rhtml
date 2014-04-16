@@ -1,0 +1,13 @@
+<h1>Banner for: <%= @banner.movie.title %></h1>
+<% for column in Banner.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @banner.send(column.name) %>
+</p>
+<% end %>
+
+<% if @banner.imagename != nil && @banner.imagename != '' %>
+	<p><img src="/images/pics_banners/<%= @banner.imagename %>"></p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @banner %> |
+<%= link_to 'Back', :action => 'list' %>

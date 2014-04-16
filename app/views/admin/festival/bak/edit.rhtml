@@ -1,0 +1,9 @@
+<h1>Editing festival</h1>
+
+<%= form_tag "/admin/festival/update/"+params[:id], :multipart => true %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @festival %> |
+<%= link_to 'Back', :action => 'list' %>

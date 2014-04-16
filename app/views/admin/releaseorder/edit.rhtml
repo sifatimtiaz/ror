@@ -1,0 +1,9 @@
+<h1>Editing Release Orders</h1>
+
+<%= form_tag "/admin/releaseorder/update/"+params[:id], :multipart => true, :id =>'addMediaForm', :name =>'addMediaForm'  %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @releaseorder %> |
+<%= link_to 'Back', :action => 'list' %>

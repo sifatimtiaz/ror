@@ -1,0 +1,33 @@
+<!-- begin main column -->
+<div class="maincol">
+
+	<h1>Listing Categories</h1>
+	
+	<% if @categories.size > 0 %>
+
+		<% for category in @categories %> 
+		   <p>
+		   	<div class="color_square" style="background-color: #<%= category.color %>"></div><b><%=category.category%></b> ( <%= link_to 'edit', :action => 'edit', :id => category %> | <%= link_to 'delete', { :action => 'destroy', :id => category }, :confirm => 'Are you sure?', :post => true %> )
+		   </p>
+		<% end %>
+
+	<% else %>
+		<p>No categories have been created.</p>
+	<% end %>
+
+	<%= link_to 'Previous page', { :page => @category_pages.current.previous } if @category_pages.current.previous %>
+	<%= link_to 'Next page', { :page => @category_pages.current.next } if @category_pages.current.next %> 
+
+</div>
+<!-- end main column -->
+
+<!-- begin right column -->
+<div class="rightcol">
+
+	<%= start_form_tag :action => @form_action, :id => @form_id %>
+  	<%= render :partial => 'form' %>
+  	<%= submit_tag "update" %>
+	<%= end_form_tag %>	
+	
+</div>
+<!-- end right column -->

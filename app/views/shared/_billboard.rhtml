@@ -1,0 +1,29 @@
+      <div class="row-override">
+        <div class="col-xs-12 slider-container" id="header_images_slide" data-cycle-pager-template="<span></span>" data-cycle-caption-plugin="caption2">
+<%#= @banners.inspect %>
+<% 
+   i = 0
+   for b in @banners 
+      i += 1
+      if (i == 1) 
+         setClass = 'first'
+      else
+         setClass = ''
+      end
+%>
+        <img src="/images/pics_banners/<%= b.imagename %>" data-url="/movie/view/<%= b.movie_id.to_s %>" data-trailer="<%= b.trailer %>" height="380" width="940" class="<%= setClass %>" />
+<% end %>
+        <div class="slider-nav">
+            <div class="slider-l"></div>
+            <div class="cycle-pager"></div>
+            <div class="slider-r"></div>
+            <div class="slider-right"></div>
+            <!--div class="slider-plus"></div-->
+        </div>
+        <!-- slider overlay -->
+          <div id="btn-1"><a href="/movie/view/#">Read More</a></div>
+          <div id="btn-2"><a href="/movie/view/#">Watch the Trailer</a></div>
+	<!-- overlay end -->
+        </div>
+      </div>
+      <div id="trailer" style="display:none;" href="#"></div>

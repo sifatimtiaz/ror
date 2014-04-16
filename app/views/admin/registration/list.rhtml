@@ -1,0 +1,29 @@
+<h1>Listing registrations</h1>
+
+<table>
+  <tr>
+  	<th>Event</th>
+  <% for column in Registration.content_columns %>  
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for registration in @registrations %>
+  <tr>  
+  <td><%= registration.event != nil ? registration.event.title : "" %></td>
+  <% for column in Registration.content_columns %>
+    <td><%=h registration.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => registration %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => registration %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => registration }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @registration_pages.current.previous } if @registration_pages.current.previous %>
+<%= link_to 'Next page', { :page => @registration_pages.current.next } if @registration_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New registration', :action => 'new' %>

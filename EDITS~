@@ -1,0 +1,6 @@
+config/routes.rb
+
+views/
+controllers/
+helpers/
+models/

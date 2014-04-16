@@ -1,0 +1,9 @@
+<h1>Editing festival</h1>
+
+<%= form_tag "/admin/movietime/update/"+params[:id], :multipart => true %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Save' %>
+<%= end_form_tag %>
+
+
+

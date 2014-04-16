@@ -1,0 +1,10 @@
+<h1>Registrant for Event:</b> <%= @registration.event != nil ? @registration.event.title : "" %></h1>
+
+<% for column in Registration.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @registration.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @registration %> |
+<%= link_to 'Back', :action => 'list' %>

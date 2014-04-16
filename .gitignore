@@ -1,0 +1,6 @@
+test/*
+tmp/*
+log/*
+public/*
+*.*~
+doc/*

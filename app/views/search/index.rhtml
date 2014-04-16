@@ -1,0 +1,65 @@
+      <div class="row">
+        <div class="col-xs-12 about">
+          <h4 class="block-head">Search Results</h4>
+
+		<!-- begin search output -->
+		<p><b><%= @errors %></b></p>
+		
+	
+<%
+		if @search != nil && @search.size > 0 
+			c=0
+%>
+			<h5><b>Search for: "<%= @params[:query] %>" returned <%= @count.to_s %> results.</b></h5>
+<div class="search-row">
+<%
+	                count = 0
+			for result in @search
+	                	count += 1
+				if( result.imagesmall == nil || result.imagesmall == "" )
+					result.imagesmall = "poster_placeholder_thumb.jpg"
+ 				end
+%>			
+				<div class="<%= cycle("newRelease", "newReleaseTwo") -%>" style="padding:10px 3px 40px 3px;">
+				<div class="coverContainer">
+<% 				if( result.imagesmall != "" )
+%>
+					<a href="/<%= result.controller.downcase %>/view/<%= result.id %>"><img src="/images/pics_<%= result.controller.downcase %>s/<%= result.imagesmall %>" border="0" alt="<%= result.title %>" align="left" />
+<% 				end 
+%>
+				</div>
+				<div class="newReleaseBody">
+ 					<div class="newReleaseTitle"><h5><b><%= link_to result.title.upcase, {:controller => result.controller.downcase, :action=>'view', :id => result.id }, {:class=>"movielink"} %></b></h5></div>
+	 				    <p class="desc">
+						<%= result.description[0,200] %>
+						<%= link_to "...more &gt;&gt;", {:controller => result.controller.downcase, :action=>'view', :id => result.id },{:class => "morelink" } %> 			  
+					    </p>
+					</div>
+				</div>
+<% 
+	 			if(c == 0)
+	 			    c=1
+	 			else
+	 			    c=0
+				    if (count < @search.size)
+%>
+				        </div>
+				        <div class="search-row">
+<%
+				    end
+	 			end
+			end
+%>
+</div>
+			<div class="col-xs-12 text-center" style="background-color:white !important;">
+			    <p><%= paginate("/search/index/?query="+params[:query]+"&amp;",@page,@perpage,@count) %></p>
+                	</div>
+<%
+		else 
+%>
+			<p class="spacious">Your search returned no results.</p>
+<%
+		end
+%>
+          </div>
+      </div>

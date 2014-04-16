@@ -1,0 +1,39 @@
+<h1>Listing User Comments</h1>
+
+<table>
+  <tr>
+  <% 
+  for column in Question.content_columns 
+  	if( column.name != 'comments' )
+  %>
+    <th><%= column.human_name %></th>
+  <% 
+  	end
+  end 
+  %>
+  </tr>
+  
+<% for question in @questions %>
+  <tr>
+  <% 
+  for column in Question.content_columns 
+  	if( column.name != 'comments' )
+  %>
+    <td><%=h question.send(column.name) %></td>
+  <% 
+  	end
+  end 
+  %>
+    <td><%= link_to 'Show', :action => 'show', :id => question %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => question %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => question }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @question_pages.current.previous } if @question_pages.current.previous %>
+<%= link_to 'Next page', { :page => @question_pages.current.next } if @question_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New question', :action => 'new' %>

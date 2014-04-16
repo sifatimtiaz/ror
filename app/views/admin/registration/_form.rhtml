@@ -1,0 +1,19 @@
+<%= error_messages_for 'registration' %>
+
+<!--[form:registration]-->
+<p><label for="registration_fullname">Fullname</label><br/>
+<%= text_field 'registration', 'fullname'  %></p>
+
+<p><label for="registration_company">Company</label><br/>
+<%= text_field 'registration', 'company'  %></p>
+
+<p><label for="registration_phone">Phone</label><br/>
+<%= text_field 'registration', 'phone'  %></p>
+
+<p><label for="registration_email">Email</label><br/>
+<%= text_field 'registration', 'email'  %></p>
+
+<p><label for="registration_withguest">Withguest</label><br/>
+<select id="registration_withguest" name="registration[withguest]"><option value="false" selected>False</option><option value="true">True</option></select></p>
+<!--[eoform:registration]-->
+

@@ -1,0 +1,21 @@
+<%= error_messages_for 'banner' %>
+
+<p><b>Banner image size must be: 500 x 180</b></p>
+<!--[form:banner]-->
+
+<p><label for="banner_movie_id">Movie</label><br/>
+<%= 
+	select_tag 'banner[movie_id]',
+	options_for_select( Movie.find(:all,:order=>"title ASC").collect { |c| [ c.title, c.id] }, @banner.movie_id )
+%>
+</p>
+
+<p>
+<label for="banner_imagename">Imagename</label><br/>
+<input type="file" name="image" value=""/>
+<%= hidden_field 'banner', 'imagename'  %>
+<% if @banner.imagename != nil && @banner.imagename != '' %>
+	<p><img src="/images/pics_banners/<%= @banner.imagename %>"></p>
+<% end %>
+</p>
+<!--[eoform:banner]-->

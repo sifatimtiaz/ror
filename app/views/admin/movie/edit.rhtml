@@ -1,0 +1,9 @@
+<h1>Editing movie</h1>
+
+<%= form_tag "/admin/movie/update/"+params[:id], :multipart => true %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @movie %> |
+<%= link_to 'Back', :action => 'list' %>

@@ -1,0 +1,22 @@
+<h1>Press Release for: <%=@preleases.title %></h1>
+<div>
+<strong>Title</strong> :: <%=@preleases.title %><br />
+ </div>
+ <div>
+<strong>Body</strong> :: <%=@preleases.body %><br />
+ </div>
+ <div>
+<strong>Source Title</strong> :: <%=@preleases.stitle %><br />
+ </div>
+ <div>
+<strong>Sub Title</strong> :: <%=@preleases.subtitle %><br />
+ </div>
+ <div>
+<strong>By Line</strong> :: <%=@preleases.byline %><br />
+ </div>
+ <div>
+<strong>Source Body</strong> ::  <blockquote><p><%=@preleases.sbody %></p></blockquote><br />
+ </div>
+
+<%= link_to 'Edit', :action => 'edit', :id => @preleases %> |
+<%= link_to 'Back', :action => 'list' %>

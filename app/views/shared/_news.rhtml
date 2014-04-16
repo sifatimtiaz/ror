@@ -1,0 +1,64 @@
+
+      <div class="row spacious">
+        <div class="col-xs-8">
+          <div class="bottom_box"> 
+            <div class="col-xs-6">
+              <h4>
+                <span class="block-more">Spotlight</span>
+                <!--div class="bottom_box_arrows pull-right">
+                  <span class="glyphicon glyphicon-chevron-left" id="news-left"></span>
+                  <span class="glyphicon glyphicon-chevron-right highlights" id="news-right" data-next=""></span>
+                </div-->
+              </h4> 
+              <div class="spotlights" style="overflow:hidden">
+<% for new in $news 
+
+	d = DateTime.new(new.d[0..3].to_i, new.d[5..6].to_i, new.d[8..9].to_i)
+%>
+<%#= new.body -- the actual news text %>
+                <p id="news-<%= new.id %>" class="slideItem">
+                  <strong><%= new.title %></strong>
+                  <br>
+                  <small><%= d.strftime("%B %e, %Y") %></small>
+                </p>
+<% end %>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+<h4 class="home-btn-right" style="left:0px;margin-top:3px;padding-right:15px;background:none;border:none;"><a href="/prelease">See All</a></h4>
+<%
+index = 0;
+for new in $news 
+      display = 'none'
+      if index == 0
+          display = 'block'
+      end
+      index = index + 1;
+%>
+              <div class="text-left news-item news-<%= new.id %>" style="display:<%= display %>">
+                <p>
+                  <H5 style="padding-top:10px;padding-right:67px;"><b><%= new.title %></b></H5>
+                  <small><%#= new.byline %></small>
+                </p>
+                <p>
+			<%= smart_truncate(new.body, :words => 40)  %>
+                </p>
+              </div>
+              <p class="text-left news-item news-<%= new.id %>" style="display:<%= display %>">
+                <a href="/<%= new.controller.downcase %>/view/<%= new.id %>"">View Press Release  <span class="glyphicon glyphicon-arrow-right"></span></a>
+              </p>
+<% end %>
+            </div>
+
+
+
+          </div> 
+        </div>
+        <div class="col-xs-4">
+          <div class="bottom_box_3">
+            <a href="/movie/index_new"><img src="/images/catalogue.jpg"></a>
+          </div>
+        </div>
+      </div>
+

@@ -1,0 +1,41 @@
+    <div id="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <img src="/images/festivals.jpg">
+        </div>
+      </div>
+          <h4 class="block-head">Markets &amp; Festivals</h4>
+
+		
+			<% if( @festivals.size > 0 ) %>
+
+			<% for festival in @festivals 
+
+ 				if( festival.imagesmall == nil || festival.imagesmall == "" || festival.imagesmall == "AFM_logo_thumb.gif" )
+ 					festival.imagesmall = "/images/festLogoEven.jpg"
+ 				else
+ 					festival.imagesmall = "/images/pics_festivals/"+festival.imagesmall
+ 				end 			
+ 			%>
+
+ 			<!-- begin festival output -->
+                        <div class="festival-entry">
+				<p><img src="<%=  festival.imagesmall %>" /></p>
+				<p><h5><b><%= festival.title.upcase %></b><h5></p>
+                                <p><h5><b><%= festival.subtitle %></b></h5></p>
+				<%#= link_to festival.title.upcase, {:controller=>"festival",:action=>"view",:id=>festival.id}, {:class=>"movielink"} %>
+ 				<p><%= festival.description %></p>
+				<a class="morelink" href="/festival/view?id=<%=festival.id%>"><%= festival.link %></a>
+ 			<!-- end festival output -->
+                        </div>
+			<% 
+ 			    end 
+ 			%>
+
+			<% else %>
+
+ 			Currently, there are no events scheduled. Please take a look at some of our latest films.
+
+ 			<% end %>
+
+    </div>

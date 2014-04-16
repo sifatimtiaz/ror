@@ -1,0 +1,28 @@
+<%= error_messages_for 'prelease' %>
+
+
+
+
+<p>
+<label for="prelease_title">Title</label><br/>
+<%= text_field 'prelease', 'title'  %><br/>
+<label for="prelease_body">Body</label><br/>
+<%= text_area 'prelease', 'body', :cols=>30, :rows=>10  %>
+<br/>
+<br/>
+This section is for press releases from other sources only<br/><br/>
+<label for="prelease_stitle">Source Title</label><br/>
+<%= text_field 'prelease', 'stitle'  %><br/>
+<label for="prelease_subtitle">Sub Title</label><br/>
+<%= text_field 'prelease', 'subtitle'  %><br/>
+<label for="prelease_byline">By Line</label><br/>
+<%= text_field 'prelease', 'byline'  %><br/>
+<label for="prelease_sdate">Source Date</label><br/>
+<%= text_field 'prelease', 'sdate'  %><br/>
+<label for="prelease_sbody">Source Body</label><br/>
+<%= text_area 'prelease', 'sbody', :cols=>30, :rows=>10  %>
+<br/>
+<br/>
+
+</p>
+<!--[eoform:banner]-->

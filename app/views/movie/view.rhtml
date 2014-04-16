@@ -1,0 +1,84 @@
+
+<%#= @movie.inspect %>
+<div class="row">
+        <div class="col-xs-12 dvd">
+          <h4 class="block-head">New Releases</h4>
+          <div class="row">
+            <div class="col-sm-offset-1 col-xs-5 text-center">
+<%
+		if( @movie.posterlarge == nil || @movie.posterlarge == "" )
+		@movie.posterlarge = "poster_placeholder.jpg"
+		@placeposter = "<img src=\"/images/pics_movies/#{@movie.posterlarge}\" alt=\"#{@movie.title}\" border=\"0\" class=\"img-responsive movie_big_thumbs\" />"
+		end
+		if( @movie.posterlarge != nil || @movie.posterlarge != "" )
+		@placeposter = "<img src=\"/images/pics_movies/#{@movie.posterlarge}\" alt=\"#{@movie.title}\" border=\"0\" class=\"img-responsive movie_big_thumbs\" />"
+		end
+		if( @movie.title == "The Human Contract" )
+		@placeposter = "<img src=\"/images/pics_movies/pressreleases.jpg\" alt=\"#{@movie.title}\" border=\"0\" class=\"img-responsive movie_big_thumbs\"/>"
+		end
+%>
+              <%= @placeposter %>
+              <div class="dvd_buttom_trailer text-center">
+                <a id="view_trailer" href="#">
+                  <span class="glyphicon glyphicon-play"></span> view trailer
+                </a>
+              </div>
+
+<% if @movie.screener != NIL && @movie.screener != '' %>
+              <div class="row text-center dvd_request">
+                <a href="<%= @movie.screener %>">Request Online Screening of This Title</a>
+              </div>
+<% end %>
+            </div>
+            <div class="col-xs-5">
+              <h4 class="block-head" style="background:none;padding-top:0;"><%= @movie.title.upcase%></h4>
+              <p class="desc"><b>RUNTIME:</b> <%= @movie.length %></p>
+<%
+    genres = ''
+    for cat in @cats
+        genres += cat.category + ', '
+    end
+%>
+              <p class="desc"><b>GENRE:</b> <%= genres[0..-3] %></p>
+              <p class="desc">
+                <b>CAST:</b>
+                <%= @movie.cast %>
+              </p>
+
+              <p class="desc"><b>DIRECTOR:</b> <%= @movie.director %></p>
+
+              <p class="desc">  
+                <b>SYNOPSIS:</b> <%= @movie.synopsis %>
+              </p>
+
+<% if @movie.link != nil && @movie.link != '' %>
+              <p class="desc"><b>LINKS:</b> <a href="<%= @movie.link %>" target="_blank"><%= @movie.link %></a></p>
+<% end %>
+<% if @movie.link2 != nil  && @movie.link2 != '' %>
+<p class="desc"><a href="<%= @movie.link2 %>" target="_blank"><%= @movie.link2 %></a></p>
+<% end %>
+<% if @movie.link3 != nil  && @movie.link3 != '' %>
+<p class="desc"><a href="<%= @movie.link3 %>" target="_blank"><%= @movie.link3 %></a></p>
+<% end %>
+            
+            </div> 
+          </div>
+        </div>
+      </div>
+
+		<% if( @movie.trailer != nil && @movie.trailer != "") #new trailer %>
+<div id="content" style="height:1px;">
+   <div id="overlay1" class="overlay">
+      <div class="flowplayer is-splash no-volume no-mute ">
+         <span class="fpbtn-close"></span>
+         <video>
+          <source type="video/flv" src="/mrgtrailers/<%= @movie.trailer %>">
+         </video>
+      </div>
+   </div>
+</div>
+		<% end %>
+
+
+
+

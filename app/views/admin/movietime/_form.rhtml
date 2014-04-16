@@ -1,0 +1,16 @@
+<!--[form:movietime]-->
+<% @movies.each do |movie| %>
+<p>Movie Title: <%= movie.title %><br/>
+
+<%= hidden_field 'movietime', 'movie_id', :value => params[:movie_id] %>
+<%= hidden_field 'movietime', 'festival_id', :value => params[:festival_id] %>
+<p><label for="movietime_date">Date:</label><%= text_field 'movietime', 'date'  %></p>
+<p><label for="movietime_time">Time:</label><%= text_field 'movietime', 'time'  %></p>
+<p><label for="movietime_location">location:</label><%= text_field 'movietime', 'location'  %></p>
+<p><label for="movietime_map">Map:</label><%= text_field 'movietime', 'map'  %></p>
+<br />
+
+ <% end %>
+</p>
+<!--[eoform:movietime]-->
+

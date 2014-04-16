@@ -1,0 +1,36 @@
+<h1>Event: <%= @event.title %></h1>
+
+<p><b>Event date:</b> <%= @event.eventdate %></p>
+
+<%= link_to 'Edit', :action => 'edit', :id => @event %> |
+<%= link_to 'Back', :action => 'list' %>
+
+
+<p>
+<% if( @event.imagelarge != "" ) %>
+	<img src="/images/pics_events/<%= @event.imagelarge %>" align="left" border="0" style="padding: 10px;"/>
+	<img src="/images/pics_events/<%= @event.imagesmall %>" align="left" border="0" style="padding: 10px;"/>
+<% end %>
+
+<% if @event.description.index(/\n/) != nil %>
+	<%= @event.description.gsub!(/\n/,'<br/><br/>') %>
+<% else %>
+	<%= @event.description %>
+<% end %>	
+
+</p>
+
+<!-- begin output registrants -->
+<div style="float: right; padding-right: 10px;">
+	<p><b>Event Registrants:</b></p>
+	 <% if(@event.registrations.size > 0) %>
+	  <ul>
+		<% for registrant in @event.registrations %>
+		 <li><%= registrant.fullname %>, <a href="mailto: <%= registrant.email %>"><%= registrant.email %></a> &mdash; ( <%= link_to "view", {:controller=>"Registration",:action=>"show",:id=>registrant.id} %>)</li>
+		<% end %>
+	  </ul>
+	 <% else %>
+	 	<p>No registrants for event.</p>
+	 <% end %>	
+</div>	 
+<!-- end output registrants -->

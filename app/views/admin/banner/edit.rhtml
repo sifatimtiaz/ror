@@ -1,0 +1,9 @@
+<h1>Editing banner</h1>
+
+<%= form_tag "/admin/banner/update/"+params[:id], :multipart => true %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @banner %> |
+<%= link_to 'Back', :action => 'list' %>

@@ -1,0 +1,22 @@
+<%= render :partial => "shared/billboard", :locals => { :banners => @banners } %>
+
+      <div class="row">
+        <div class="col-xs-12 about">
+          <h4 class="home-btn-right"><a href="/movie/index_new">See More</a></h4>
+          <h4 class="block-head">New Releases</h4>
+          <ul id="carousel">
+<!-- we will get these from a controller array: 
+	consumer_controller.rb
+	  variable 'banners' ... or make a new one?	  
+-->
+<% for releaseorder in @newmovieorders %>
+	        <li>
+	        	<a href="/movie/view/<%= releaseorder.id %>"><img src="/images/pics_movies/med/<%= releaseorder.postermed %>" alt="<%= releaseorder.title %>"></a>
+	        </li>
+<% end %>
+
+          </ul>
+        </div>
+      </div>
+
+<%= render :partial => "shared/news", :locals => { :news=> $news } %>

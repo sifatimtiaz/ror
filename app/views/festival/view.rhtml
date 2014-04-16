@@ -1,0 +1,20 @@
+    <div id="content">
+      <div class="row">
+        <div class="col-xs-12">
+
+		<% @festival.each do |festival| %>
+			<!--p class='festival-header'>
+                                                <strong><%= festival.title.upcase %></b> <br /> <%= festival.subtitle %></strong>
+ 			<p-->
+                                                <%# if festival.description.index(/\n/) != nil %>
+                                                <%#= festival.description.gsub!(/\n/,'<br/>') %>
+                                                <%# else %>
+                                                <%#= festival.description %> 
+			                        <%# end %>
+ 			<iframe style="width:940px; height:2100px;" src="<%= festival.link %>"></iframe>
+
+                <!-- end festival output -->
+                <% end %>
+        </div>
+      </div>		
+    </div>

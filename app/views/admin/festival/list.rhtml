@@ -1,0 +1,31 @@
+<h1>Listing festivals</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Link:</th>
+    <th colspan="3">&nbsp;</th>
+  </tr>
+  
+  
+<% for festival in @festivals %>
+  <tr>
+
+	<td><p><%= festival.title %></p></td>
+	<td><p><%= festival.description[0,50] %>...</p></td>
+	<td><p><%= festival.link != '' ? "<a href=\""+festival.link+"\" target=\"_blank\">link</a>" : '' %></p></td>
+
+    <td><%= link_to 'Show', :action => 'show', :id => festival %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => festival %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => festival }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @festival_pages.current.previous } if @festival_pages.current.previous %>
+<%= link_to 'Next page', { :page => @festival_pages.current.next } if @festival_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New festival', :action => 'new' %>

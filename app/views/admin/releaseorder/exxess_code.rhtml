@@ -1,0 +1,28 @@
+<div class="rightSideRo">
+<%= form_tag "/admin/releaseorder/update_order/", :multipart => true, :id =>'update_order', :name =>'update_order' %>
+  Priority Level :: Movie Title
+  <table cellpadding="0" cellspacing="0" border="0" width="250">
+  <% @releaseorders.each do |releaseorder| %>
+  <tr class="<%= cycle("even", "odd") -%>">
+  <td><input type="text" value="<%=releaseorder.order_list %>" readonly="readonly" size="1" name="order_list" /> <%=releaseorder.title %><br /></td>
+  <td><%= link_to 'Edit', :action => 'edit_order', :id => releaseorder.id %></td>
+  <td><input type="hidden" value="<%=releaseorder.id %>" name="id" /><%= link_to 'Remove', :action => 'destroy', :id => releaseorder.id %></td>
+   </tr>
+   <% end %>
+    </table>
+   <br />
+<%= submit_tag 'Update' %>
+<%= end_form_tag %>
+ </div>
+
+ 
+ def last_record
+     @festivals = Festival.find (:all, :order => "id DESC", :limit => 1)
+     @movies = Movie.find(:all,:order => "title")
+     @films = Film.find(:all)
+    end
+     def add_movie
+    
+        @festivals = Festival.find (:all, :order => "id DESC", :limit => 1)
+        @filmlast = Film.find (:all, :order => "id DESC", :limit => 1)
+    redirect_to :action => 'last_record'

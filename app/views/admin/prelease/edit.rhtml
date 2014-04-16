@@ -1,0 +1,9 @@
+<h1>Editing Press Release</h1>
+
+<%= form_tag "/admin/prelease/update/"+params[:id], :multipart => true %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @prelease %> |
+<%= link_to 'Back', :action => 'list' %>

@@ -1,0 +1,22 @@
+   <!--div id="content"-->
+      <div class="row">
+        <div class="col-xs-12">
+          <img src="images/about.jpg">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 about">
+          <h4 class="block-head">About</h4>
+          <h5><b><%= @about.title %></b> 
+            <br>
+            <small>Company Profile </small>
+          </h5>
+<p>
+<%= @about.synopsis.gsub(/\n/,"<br/>") %>
+</p>
+        </div>
+      </div>
+
+
+<%= render :partial => "shared/news", :locals => { :news=> $news } %>

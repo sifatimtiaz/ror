@@ -1,0 +1,40 @@
+<%#= @preleases.inspect %>
+      <div class="row">
+        <div class="col-xs-12 press">
+          <h4 class="block-head">Press Releases</h4>
+<% if( @preleases.size > 0 ) %>
+<%
+     for prelease in @preleases
+        if prelease.date != nil
+            d = prelease.date.to_formatted_s(:rfc822)
+            arr = d.split("-")
+            d = arr[1] + '.' + arr[2] + '.' + arr[0]
+        else 
+            d = '?.?.?'
+        end
+%>
+          <div class="col-xs-6 artciles" style="height:120px;">
+            <h5><b><%= d %> | <span class="press_title"><%= link_to prelease.title,{:controller=>"prelease",:action=>"view",:id=>prelease.id},{:style=>"color:#428bca;"} %></span></b></h5>
+            <p>
+               <%=  smart_truncate(prelease.body, :words => 40) %>
+                <%= link_to "...more",{:controller=>"prelease",:action=>"view",:id=>prelease.id},{:style=>"color:#428bca;"} %>
+            </p>
+          </div>
+<%   end %>
+
+<!-- pagination bar -->
+      <div class="row">
+        <div class="col-xs-12 text-center">
+            <%= paginate2("/prelease/?",@page,@perpage,@count) %>
+        </div>
+      </div>
+<!-- end pagination bar -->
+
+<% else %>
+        <p> Currently, there are no events scheduled.</p>
+<% end %>
+        </div>
+      </div>
+
+
+<%= render :partial => "shared/news", :locals => { :news=> $news } %>

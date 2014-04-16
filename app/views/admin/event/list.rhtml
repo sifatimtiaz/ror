@@ -1,0 +1,28 @@
+<h1>Listing events</h1>
+
+<table>
+  <tr>
+  	<th>Title</th>
+  	<th>Description</th>
+  	<th colspan="3">&nbsp;</th>
+  </tr>
+  
+<% for event in @events %>
+  <tr>
+  
+  <td><p><%= event.title %></p></td>
+  <td><p><%= event.description[0,50] %>...</p></td>
+
+    <td><%= link_to 'Show', :action => 'show', :id => event %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @event_pages.current.previous } if @event_pages.current.previous %>
+<%= link_to 'Next page', { :page => @event_pages.current.next } if @event_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New event', :action => 'new' %>

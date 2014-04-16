@@ -1,0 +1,31 @@
+<h1>Festival: <%= @festival.title %></h1>
+
+<ul>
+	<li>Subtitle: <%= @festival.subtitle %></li>
+	<li>Short description: <%= @festival.shortdesc %></li>
+	<%= @festival.link != '' ? "<li><a href=\""+@festival.link+"\" target=\"_blank\">link</a></li>" : '' %></p>
+</ul>
+
+<p>
+<% if( @festival.imagelarge != nil && @festival.imagelarge != "" ) %>
+	<img src="/images/pics_festivals/<%= @festival.imagelarge %>" align="left" border="0" style="padding: 10px;"/>
+	<img src="/images/pics_festivals/<%= @festival.imagesmall %>" align="left" border="0" style="padding: 10px;"/>	
+<% end %>
+
+<% if @festival.description.index(/\n/) != nil %>
+	<%= @festival.description.gsub!(/\n/,'<br/><br/>') %>
+<% else %>
+	<%= @festival.description %>
+<% end %>	
+</p>
+
+<p>
+<b>Movies: </b>
+<% for f in @festival.movies %>
+	<%= f.title %> <br/>
+<% end %>
+
+</p>
+
+<%= link_to 'Edit', :action => 'edit', :id => @festival %> |
+<%= link_to 'Back', :action => 'list' %>
