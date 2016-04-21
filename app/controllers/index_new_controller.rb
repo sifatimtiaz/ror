@@ -5,13 +5,13 @@ class IndexNewController < ConsumerController
     @onload = "n = new Scroller();\n n.init(n,'newsdata','newscontainer');"
     @onloadpress = "n = newpress Scroller();\n n.init(n,'newsdata','newscontainer');"
     @festivals = Festival.find(:all, :order => "festivaldate ASC", :limit => 2)
-    @newreleases = Movie.find(:all, :order => "releasedate DESC", :limit => 12)
+    # @newreleases = Movie.find(:all, :order => "releasedate DESC", :limit => 12)
     page = 'Mainline Releasing'
 
 
     if true
       # Get releases, can have more than 3.
-      @newmovieorders = Releaseorder.find :all, :joins => "left join movies on releaseorders.movie_id = movies.id", :select => "releaseorders.*, movies.title, movies.synopsis, movies.postersmall, movies.postermed, movies.id", :order => "order_list ASC", :limit => 12
+      @newmovieorders = Releaseorder.find :all, :joins => "left join movies on releaseorders.movie_id = movies.id", :select => "releaseorders.*, movies.title, movies.synopsis, movies.postersmall, movies.postermed, movies.id", :order => "order_list ASC"
     else
       # Just for now.
       @newmovieorders = Movie.find :all, :order => "releasedate DESC", :limit => 20

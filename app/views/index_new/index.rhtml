@@ -11,7 +11,10 @@
 -->
 <% for releaseorder in @newmovieorders %>
 	        <li>
-	        	<a href="/movie/view/<%= releaseorder.id %>"><img src="/images/pics_movies/med/<%= releaseorder.postermed %>" alt="<%= releaseorder.title %>"></a>
+	        	<a class="imgwrap" href="/movie/view/<%= releaseorder.id %>" title="<%= releaseorder.title %>">
+  	        	<div style="background-image: url('/images/pics_movies/med/<%= releaseorder.postermed %>');"></div>
+  	        	<!--img src="/images/pics_movies/med/<%= releaseorder.postermed %>" alt="<%= releaseorder.title %>"-->
+  	       </a>
 	        </li>
 <% end %>
 

@@ -12,11 +12,16 @@
 	for c in movie.categories
 	    genre << c.category.capitalize << ", "
 	end
+
+	if movie.title == nil then
+		next
+end
 	genre = genre.chomp(", ")
-%>
+    img_src = "/images/pics_movies/med/#{!movie.postermed ||  movie.postermed.empty? ? 'poster_placeholder.jpg' : movie.postermed}"
+ %>
             <li class="movie_thumbs">
-              <a href="/movie/view/<%= movie.id %>">
-                  <img src="/images/pics_movies/med/<%= movie.postermed %>" alt="<%= movie.title.titleize %>">
+              <a href="/movie/view/<%= movie.id %>" class="imgwrap">
+                <div class="img" style="background-image: url('<%= img_src %>');" title="<%= movie.title.titleize %>"></div>
               </a>
               <p class="title"><%= movie.title.titleize %></p>
               <p class="genre"><%= genre %></p>

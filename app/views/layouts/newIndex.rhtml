@@ -1,71 +1,88 @@
 <%
-    #for navbar
-    active = Array.new(8, '')
-    hover = Array.new(7, 'nonhovered')
-    bannerActiveID = 'active '
-    bgClass = 'bg-1'
-    page_id = controller.controller_name << '-' << controller.action_name
-    page_title = 'Lightning Entertainment'
-    case page_id
-    when 'index_new-index' # home
-      #active[0] = bannerActiveID
-      #hover[0] = 'selected-always'
-    when 'newrelease-index_new' # new release
-      active[1] = bannerActiveID
-      hover[1] = 'selected-always'
-    when 'movie-index_new' # catalog 
-      active[2] = bannerActiveID
-      hover[2] = 'selected-always'
-    when 'movie-catsearch' # genre
-      active[2] = bannerActiveID
-      hover[2] = 'selected-always'
-      bgClass = 'bg-2'
-    when 'movie-view' # dvd
-      active[2] = bannerActiveID
-      hover[2] = 'selected-always'
-      bgClass = 'bg-2'
-    when 'festival-index' # dvd
-      hover[3] = 'selected-always'
-      active[3] = bannerActiveID
-    when 'about-index'      # about
-      hover[4] = 'selected-always'
-      active[4] = bannerActiveID
-    when 'contact-index' # contact page
-      hover[5] = 'selected-always'
-      active[5] = bannerActiveID
-    when 'prelease-index' # press releases index
-      hover[7] = 'selected-always'
-      active[7] = bannerActiveID;
-      bgClass = 'bg-2'
-    when 'prelease-view' # press release article
-      hover[7] = 'selected-always'
-      active[7] = bannerActiveID
-      bgClass = 'bg-2'
-    when 'search-index' # press release article
-      hover[6] = 'selected-always'
-      active[6] = bannerActiveID
-      bgClass = 'bg-2'
-    when 'privacy-index' # privacy
-      active[8] = bannerActiveID
-    else
-      active[0] = '';
-    end
+   #for navbar
+   current_page_is = Hash.new(false)
+   hover = Hash.new('nonhovered')
+   bgClass = 'bg-1'
+   page_title = 'Lightning Entertainment'
+   page_id = controller.controller_name << '-' << controller.action_name
+   movieplayer = false
+   flowdiv = false
+   showCarousel = false
 
-    movieplayer = false
-    flowdiv = false
-    if page_id == 'movie-view' || page_id == 'index_new-index' || active[1] == bannerActiveID || active[2] == bannerActiveID || active[8] == bannerActiveID # these are the movie view page and pages with the cycle billboard
-        movieplayer = true
-        if page_id != 'movie-view'
-            flowdiv = true
-        end
-    end
+   case page_id
+   when 'index_new-index' # home
+      #current_page_is[0] = :active
+      #hover[0] = 'selected-always'
+
+   when 'newrelease-index_new' # new release
+      current_page_is[:new_releases] = :active
+      hover[:new_releases] = 'selected-always'
+
+   when 'movie-index_new' # catalog 
+      current_page_is[:movie_pages] = :active
+      hover[:movie_pages] = 'selected-always'
+
+   when 'movie-catsearch' # genre
+      current_page_is[:movie_pages] = :active
+      hover[:movie_pages] = 'selected-always'
+      bgClass = 'bg-2'
+
+   when 'movie-view' # dvd
+      current_page_is[:movie_pages] = :active
+      hover[:movie_pages] = 'selected-always'
+      bgClass = 'bg-2'
+
+   when 'festival-index' # dvd
+      current_page_is[:festival_page] = :active
+      hover[:festival_page] = 'selected-always'
+
+   when 'about-index'      # about
+      current_page_is[:about] = :active
+      hover[:about] = 'selected-always'
+
+   when 'contact-index' # contact page_id
+      current_page_is[:contact] = :active
+      hover[:contact] = 'selected-always'
+
+   when 'prelease-index' # press releases index
+      current_page_is[:pre_release] = :active;
+      hover[:pre_release] = 'selected-always'
+      bgClass = 'bg-2'
+
+   when 'prelease-view' # press release article
+      current_page_is[:pre_release] = :active
+      hover[:pre_release] = 'selected-always'
+      bgClass = 'bg-2'
+
+   when 'search-index' # press release article
+      current_page_is[:search_results] = :active
+      hover[:search_results] = 'selected-always'
+      bgClass = 'bg-2'
+
+   when 'privacy-index' # privacy
+      current_page_is[:privacy_index] = :active
+
+   else
+      current_page_is[0] = '';
+
+   end
+
+   # these are the movie view page and pages with the cycle billboard
+   if page_id == 'movie-view' || page_id == 'index_new-index' || current_page_is[:new_releases] || current_page_is[:movie_pages] || current_page_is[:privacy_index]
+      movieplayer = true
+      if page_id != 'movie-view'
+         flowdiv = true
+      end
+   end
 %>
 <!DOCTYPE html>
 <html>
 <head>
   <title><%= page_title %></title>
+  <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!--meta name="viewport" content="width=device-width, initial-scale=1.0" /-->
+  <meta name="google-site-verification" content="luDdYnvL-k9u4jlzruWLT7iB0ltyb_KfC4Py4fkhGZY" />
   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/css/jquery.bxslider.css">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -104,13 +121,13 @@
         <div class="collapse navbar-collapse" id="lightning_top_nav">
           <ul class="nav navbar-nav">
 <%#= active.inspect %>
-            <li class="<%= active[1] %><%= hover[1] %>"><a href="/newrelease/index_new">New<br>Releases</a></li>
-            <li class="<%= active[2] %><%= hover[2] %>"><a href="/movie/index_new" class="short">Catalogue</a></li>
-            <li class="<%= active[3] %><%= hover[3] %>"><a href="/festival">Markets &amp; Festivals</a></li>
-            <li class="nonhovered"><a href="http://mainlinereleasing.com" target="_blank" class="short">Erotic</a></li>
-            <li class="<%= active[4] %><%= hover[4] %>"><a href="/about" class="short">About</a></li>
-            <li class="<%= active[5] %><%= hover[5] %>"><a href="/contact" class="short">Contact</a></li>
-            <li class="<%= active[6] %>selected-always"><a href="#" id="topSearch"></a></li>
+            <!-- <li class="nonhovered"><a href="http://mainlinereleasing.com" target="_blank">Mainline<br>Releasing</a></li> --!>
+            <li class="<%= current_page_is[:new_releases].to_s   %> <%= hover[:new_releases].to_s  %>"><a href="/newrelease/index_new">New<br>Releases</a></li>
+            <li class="<%= current_page_is[:movie_pages].to_s    %> <%= hover[:movie_pages].to_s   %>"><a href="/movie/index_new" class="short">Catalogue</a></li>
+            <li class="<%= current_page_is[:festival_page].to_s  %> <%= hover[:festival_page].to_s %>"><a href="/festival">Markets &amp; Festivals</a></li>
+            <li class="<%= current_page_is[:about].to_s          %> <%= hover[:about].to_s         %>"><a href="/about" class="short">About</a></li>
+            <li class="<%= current_page_is[:contact].to_s        %> <%= hover[:contact].to_s       %>"><a href="/contact" class="short">Contact</a></li>
+            <li class="<%= current_page_is[:search_results].to_s %> selected-always"><a href="#" id="topSearch"></a></li>
           </ul>
 <div name="searchBox" id="searchBox" title="Search titles" style="display:none;">
   <form action="/search/index" method="post">
@@ -132,7 +149,7 @@
           <p class="copyrights text-left">
             8484 Wilshire Blvd - Suite 850 <br>
             Beverly Hills, CA 90211 | P. (323) 852-5020 x 4213 | F. (323) 900-0655 <br>
-            &copy; 2013 Lightning Entertainment Group, Inc., All Rights Reserved | <a href="/privacy">PRIVACY POLICY</a>
+            &copy; <%= Date.today.year %> Lightning Entertainment Group, Inc., All Rights Reserved | <a href="/privacy">PRIVACY POLICY</a>
 	  </p>
 	</div>
         <div class="col-xs-2 darker">
@@ -159,12 +176,9 @@
 <% if flowdiv %>
 <div id="content" style="height:1px;">
    <div id="overlay1" class="overlay">
-      <div class="flowplayer is-splash no-volume no-mute ">
+      <div id="trailer-player" class="flowplayer is-splash no-volume no-mute" data-ratio="0.417" data-key="$507531416791168">
          <span class="fpbtn-close"></span>
-
-         <video>
-            <source type="video/flv" src="/mrgtrailers/<%= @movie.trailer %>">
-         </video>
+         <video> <source type="video/mp4" src="/mrgtrailers/<%= @movie.trailer %>"> </video>
       </div>
    </div>
 </div>
@@ -177,9 +191,89 @@
 <script type="text/javascript" src="http://malsup.github.io/min/jquery.cycle2.min.js"></script>  
 <% if movieplayer #flowplayer %>
 <script type="text/javascript" src="/js/flowplayer.min.js"></script>
-<script type="text/javascript" src="/js/movieplayer.js"></script>
 <% end %>
 <script type="text/javascript">
+<% if movieplayer %>
+// flowplayer html5
+// The smallest jQuery Overlay
+$.fn.overlay = function(){
+
+   var ACTIVE = "is-active";
+
+   function toggle(el){
+      $("body").toggleClass("is-overlayed", !!el);
+
+      if (el){
+         el.addClass(ACTIVE).trigger("open");
+      } else {
+         els.filter("." + ACTIVE).removeClass(ACTIVE).trigger("close");
+      }
+   }
+
+   // trigger elements
+   var els = this.click(function(){
+      toggle($(this));
+   });
+
+   // esc key
+   $(document).keydown(function(e){
+      if (e.which == 27){
+         toggle();
+      }
+   });
+
+   // close
+   $(".fpbtn-close", this).click(function(e){
+      toggle();
+      e.stopPropagation();
+   });
+
+   return els;
+}
+
+$(document).ready(function(){
+   // the player will fill the entire overlay
+   // so we only need an overlay where inline video is supported
+   if (flowplayer.support.inlineVideo){
+      // construct overlays
+      $(".overlay").overlay().bind("close", function(){
+
+         // when overlay closes -> unload flowplayer
+         $(this).find(".flowplayer").data("flowplayer").unload();
+         $(this).find('video').remove();
+      })
+   }
+
+   function playFn(e){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      e.stopPropagation();
+
+      function fnClose(e){
+         $('#content').off('click', fnClose);
+         $('.fpbtn-close').off('click', fnClose);
+         $('.fpbtn-close').trigger('click');
+      }
+
+      $('.flowplayer').append(
+         '<div class="is-ready is-paused is-closeable"><video src=""> type="video/mp4" class="fp-engine" poster="/images/loading.gif" preload="none" x-webkit-airplay="allow"></video></div>'
+      ).parent().trigger('click').parent().on(
+         'click',
+         function(){/* fnClose() instead! */}
+      ).find('.fpbtn-close').on(
+         'click',
+         fnClose
+      ).parent().find('video').trigger('click')  //last trigger will play video
+   }
+
+   // the 'view trailer' button in movie title/view page
+   $('#view_trailer').off('click');
+   $('#view_trailer').on('click', playFn);
+   // the billboard 'view trailer' button
+   $('#trailer').off('click');
+   $('#trailer').on('click', playFn);
+});
+<% end %>
 /*
 # when to apply??
 flowplayer.conf = {
@@ -187,198 +281,227 @@ flowplayer.conf = {
 };
 */
 
-/* display content! */
-$('.row').css('display','block');
-$('.row-override').css('display','block');
 
+$(document).ready(function(){ 
 
+   /* display content! */
+   $('.row').css('display','block');
+   $('.row-override').css('display','block');
 
-  $(document).ready(function() {
-    /* navbar states */
-    var fn = function() {
-        if (! $(this).hasClass('selected-always')) {
-          $(this).toggleClass('hovered');
-          $(this).toggleClass('nonhovered');
-        }
-    };
-    $('.navbar-nav li').hover(fn,fn);
-    /* end */
+   /* navbar states */
+   var fn = function(){
+      if (! $(this).hasClass('selected-always')){
+         $(this).toggleClass('hovered');
+         $(this).toggleClass('nonhovered');
+      }
+   }
+   $('.navbar-nav li').hover(fn,fn);
+   /* end */
 
-/*    $("#searchBox").submit(function() {
+/*    $("#searchBox").submit(function(){
       $(this).submit();
 //      return true;
     });
 */
 
-    var query = $( "#query" ),
-      allFields = $( [] ).add( query ),
-      tips = $( ".validateTips" );
+   var query = $( "#query" );
+   var allFields = $( [] ).add( query );
+   var tips = $( ".validateTips" );
  
-    function updateTips( t ) {
+   function updateTips( t ){
       tips
         .text( t )
-        .addClass( "ui-state-highlight" );
-      setTimeout(function() {
-        tips.removeClass( "ui-state-highlight", 1500 );
-      }, 500 );
-    }
+        .addClass( "ui-state-highlight" )
+      setTimeout(function(){
+        tips.removeClass( "ui-state-highlight", 1500 )
+      }, 500 )
+   }
  
-    function checkLength( o, n, min, max ) {
-      if ( o.val().length > max || o.val().length < min ) {
-        o.addClass( "ui-state-error" );
-        updateTips( "Length of " + n + " must be between " +
-          min + " and " + max + "." );
-        return false;
+   function checkLength( o, n, min, max ){
+      if ( o.val().length > max || o.val().length < min ){
+         o.addClass( "ui-state-error" );
+         updateTips( "Length of " + n + " must be between " +
+            min + " and " + max + "." );
+         return false;
       } else {
-        return true;
+         return true;
       }
-    }
+   }
  
-    function checkRegexp( o, regexp, n ) {
-      if ( !( regexp.test( o.val() ) ) ) {
-        o.addClass( "ui-state-error" );
-        updateTips( n );
-        return false;
+   function checkRegexp(o, regexp, n){
+      if ( !( regexp.test( o.val() ) ) ){
+         o.addClass( "ui-state-error" );
+         updateTips( n );
+         return false;
       } else {
-        return true;
+         return true;
       }
-    }
+   }
  
-    $( "#searchBox" ).dialog({
+   $( "#searchBox" ).dialog({
       appendTo: '#lightning_top_nav',
       autoOpen: false,
       height: 300,
       width: 350,
       modal: true,
       buttons: {
-        "Search": function() {
-          var bValid = true;
-          allFields.removeClass( "ui-state-error" );
+         Search: function(){
+            var bValid = true;
+            allFields.removeClass( "ui-state-error" );
  
-          bValid = bValid && checkLength( query, "query", 3, 18 );
+            bValid = bValid && checkLength( query, "query", 3, 18 );
 
-          bValid = bValid && checkRegexp( query, /^([\ 0-9a-zA-Z_])+$/i, "text may consist of alphanumeric, underscores, or spaces." );
-          // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+            bValid = bValid && checkRegexp( query, /^([\ 0-9a-zA-Z_])+$/i, "text may consist of alphanumeric, underscores, or spaces." );
+            // From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
 
-          if ( bValid ) {
-            $("form:first").submit();
+            if ( bValid ){
+               $("form:first").submit();
+               $( this ).dialog( "close" );
+            }
+         }, 
+         Cancel: function(){
             $( this ).dialog( "close" );
-          }
-        }, 
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
+         }
       },
-      close: function() {
-        allFields.val( "" ).removeClass( "ui-state-error" );
+      close: function(){
+         allFields.val( "" ).removeClass( "ui-state-error" );
       }
-    }); 
-    $("#topSearch").button().click(function() {
-        $( "#searchBox" ).dialog( "open" );
-    });
+   });
+   $("#topSearch").button().click(function(){
+      $( "#searchBox" ).dialog( "open" );
+   });
 
 <% if page_id == 'index_new-index' # home page %>
-  $('#carousel').bxSlider({
-    preloadImages: 'visible',
-    slideWidth: 170,
-    minSlides: 0,
-    maxSlides: 20,
-    moveSlides: 5,
-    slideMargin: 10,
-    pager: false,
-    infiniteLoop: false,
-    onSliderLoad: function(e) {
+
+   ;(function(){
+      var new_releases_carousel = $('#carousel').bxSlider({
+         preloadImages: 'visible',
+         slideWidth: 170,
+         minSlides: 0,
+         maxSlides: 20,
+         moveSlides: 5,
+         slideMargin: 10,
+         pager: false,
+         infiniteLoop: false,
+         onSliderLoad: function(e){
             $('.bx-loading').remove();
             $('.carousels').css('display','block');
-    },
-  });
-  /* again, for added measure, because of IE 8 :( */
-  $('.bx-loading').remove();
-  $('.carousels').css('display','block');
-<% end %>
-
-
-<% if page_id == 'index_new-index' || active[1] == bannerActiveID || active[2] == bannerActiveID || active[8] == bannerActiveID %>
-    var loadCycleFn = function(ev, options) {
-//console.log(options);console.log('set ' + options.url + ' with ' + options.trailer);
-            $('#btn-1 a').off('click');
-            $('#btn-1 a').on('click', function(e) {
-                e.preventDefault();
-               location.href = options.url;
-            });
-            $('#btn-2 a').off('click');
-            $('#btn-2 a').on('click').on('click', function(e) {
-                e.preventDefault();
-console.log('show movie: ' + options.trailer);
-//console.log($('#trailer'));
-                // the billboard 'view trailer' button
-                $('#trailer').trigger('click');
-            });
-    };
-    $('#header_images_slide').cycle({ 
-         speed:  '1000', 
-         timeout: 6000, 
-         next:   '.slider-right', 
-	 pager: '.cycle-pager'
-    });
-    $('#header_images_slide').on('cycle-after', loadCycleFn);
-    /* initialize first slide buttons */
-    var first_url = $('#header_images_slide img:eq(0)').attr('data-url');
-    var first_trailer = $('#header_images_slide img:eq(0)').attr('data-trailer');
-    loadCycleFn(null,{
-        url: first_url,
-        trailer: first_trailer
-    });
+         }
+      });
+      /* again, for added measure, because of IE 8 :( */
+      $('.bx-loading').remove();
+      $('.carousels').css('display','block');
+   })()
 
 <% end %>
-<% if page_id == 'index_new-index' || active[4] == bannerActiveID || active[5] == bannerActiveID || active[7] == bannerActiveID || active[8] == bannerActiveID %>
-    <!-- newsbox -->
-    $('.slideItem').on('click', function(e) {
-	var article = '.' + $(this).attr('id');
-        $('.news-item').css('display','none');
-        $(article).css('display','block');
-    });
-<% end %>
+<% if page_id == 'index_new-index' || current_page_is[:new_releases] || current_page_is[:movie_pages] || current_page_is[:privacy_index] %>
 
-var x =0;
-var slides=$('.carousel2').length;
+   ;(function(){
+      var url = $('#header_images_slide img:eq(0)').attr('data-url');
+      var trailer = $('#header_images_slide img:eq(0)').attr('data-trailer');
+
+      var watch_btn = $('#btn-2');
+      var read_btn = $('#btn-1');
+      watch_btn.visible = true;
+      read_btn.visible = true;
+      
+      var banner_carousel = $('#header_images_slide').cycle({
+         speed:   '1000',
+         timeout:  6000,
+         next:    '.slider-right',
+         pager:   '.cycle-pager'
+      });
+
+      banner_carousel.on('cycle-after', function(ev, ops){    
+    
+         url = ops.url;
+         trailer = ops.trailer;
+         
+         console.log(trailer);
+
+         if ((!trailer || !trailer.length) && watch_btn.visible) {
+            watch_btn.css({visibility:'hidden'});
+            watch_btn.visible = false;
+         } else if (trailer && !!trailer.length && !watch_btn.visible) {
+            watch_btn.css({visibility:'visible'});
+            watch_btn.visible = true;
+         }
+      });
+
+      read_btn.children('a').on('click', function(e){
+         e.preventDefault();
+         location.href = url;
+      });
+
+      watch_btn.children('a').on('click', function(e){
+         e.preventDefault();
+         var $vid = $('#trailer-player').flowplayer();
+         if (trailer.length) {
+            $vid.unload().load('/mrgtrailers/'+trailer);
+            $('#trailer-player').trigger('click'); // the billboard 'view trailer' button
+         }
+      });
+   })();
+
+<% end %>
+<% if page_id == 'index_new-index' || current_page_is[:about] || current_page_is[:contact] || current_page_is[:pre_release] || current_page_is[:privacy_index] %>
+
+   // newsbox
+   $('.slideItem').on('click', function(e){
+      var article = '.' + $(this).attr('id');
+      $('.news-item').css('display','none');
+      $(article).css('display','block');
+   });
+
+<% end %>
 <% if page_id == 'movie-index_new' # catalog page %>
-  $('.carousel2').bxSlider({
-    preloadImages: 'visible',
-    slideWidth: 170,
-    minSlides: 0,
-    maxSlides: 7,
-    moveSlides: 5,
-    slideMargin: 10,
-    adaptiveHeight: true,
-    infiniteLoop: false,
-    myObj: this,
-    onSliderLoad: function(e) {
-        x++;
-//console.log(slides + ' found. ' + x + ' slides loaded');
-	if (x >= 6) { // why? because for some reason only 6 will finish loading!!
-//           setTimeout(1000, function() {
-               $('.bx-wrapper .bx-viewport').css('padding-top', '10px');
-               $('.bx-wrapper .bx-viewport').removeAttr('class');
-               $('.bx-wrapper').removeAttr('style');
-               //$('.bx-wrapper div:eq(0)').css('height', '210px');
-               $('.carousel2').parent().css('height', '210px');
-               $('.bx-loading').remove();
-               $('.carousels').css('display','block');
-//           });
 
-	}
-    },
-  });
-<% end %>
+   ;(function(){
+      var x = 0;
+      var slides = $('.carousel2').length;
+      function runLoader(){
+         $('.bx-wrapper .bx-viewport').css('padding-top', '10px');
+         $('.bx-wrapper .bx-viewport').removeAttr('class');
+         $('.bx-wrapper').removeAttr('style');
+         //$('.bx-wrapper div:eq(0)').css('height', '210px');
+         $('.carousel2').parent().css('height', '210px');
+         $('.bx-loading').remove();
+         $('.carousels').css('display','block');
+      }
 
-<% if page_id == 'movie-index_new' # catalog %>
-    $('#genre_id').on('change',function(e) {
-        var genre_id = $(this).val();
-        window.location = '/movie/index_new/' + genre_id + '/<%= @sort %>/';
-    });
+      var tell_me_what_this_is = $('.carousel2').bxSlider({
+         preloadImages: 'visible',
+         slideWidth: 170,
+         minSlides: 0,
+         maxSlides: 7,
+         moveSlides: 5,
+         slideMargin: 10,
+         adaptiveHeight: true,
+         infiniteLoop: false,
+         myObj: this,
+         onSliderLoad: function(e){
+            x++;
+            console.log(slides + ' found. ' + x + ' slides loaded');
+            // why? because for some reason only 6 will finish loading!!
+            if (x >= 6) {
+               runLoader()
+               // setTimeout(1000, runLoader);
+            }
+         }
+      });
+      
+      // if (typeof initBannerButtons !== 'undefined') {
+      //    initBannerButtons(slider)
+      // }
+   })()
+
+   $('#genre_id').on('change',function(e){
+      var genre_id = $(this).val();
+      window.location = '/movie/index_new/' + genre_id + '/<%= @sort %>/';
+   })
+
 <% end %>
-  });
+})
 
 
 </script>

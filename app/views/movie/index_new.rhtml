@@ -31,9 +31,12 @@
             genre << c.category.capitalize << ", "
         end
         genre = genre.chomp(", ")
+        img_src = "/images/pics_movies/med/#{movie.postermed && movie.postermed.empty? ? 'poster_placeholder.jpg' : movie.postermed}"
      %>
                 <li class="movie_thumbs">
-                  <a href="/movie/view/<%= movie.id %>"><img src="/images/pics_movies/med/<%= movie.postermed %>" alt="<%= movie.title.titleize %>"></a>
+                  <a href="/movie/view/<%= movie.id %>" class="imgwrap" title="<%= movie.title.titleize %>">
+                    <div style="background-image: url('<%= img_src %>');"></div>
+                  </a>
                   <p class="title"><a href="/movie/view/<%= movie.id %>" class="title"><%= movie.title %></a></p>
                   <p class="<%= genre %>"></p>
         <% if movie.truncated == true  %>

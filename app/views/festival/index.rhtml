@@ -25,7 +25,8 @@
                                 <p><h5><b><%= festival.subtitle %></b></h5></p>
 				<%#= link_to festival.title.upcase, {:controller=>"festival",:action=>"view",:id=>festival.id}, {:class=>"movielink"} %>
  				<p><%= festival.description %></p>
-				<a class="morelink" href="/festival/view?id=<%=festival.id%>"><%= festival.link %></a>
+				<!--a class="morelink" href="/festival/view?id=<%=festival.id%>"><%= festival.link %></a-->
+				<iframe style="width:100%; height:<%= festival.embedheight ||= 2000 %>px; border: 0" src="<%= festival.link %>"></iframe>
  			<!-- end festival output -->
                         </div>
 			<% 

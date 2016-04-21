@@ -1,5 +1,5 @@
       <div class="row-override">
-        <div class="col-xs-12 slider-container" id="header_images_slide" data-cycle-pager-template="<span></span>" data-cycle-caption-plugin="caption2">
+        <div class="col-xs-12 slider-container" id="header_images_slide" data-cycle-pager-template="<span></span>" data-cycle-caption-plugin="caption2" data-cycle-slides="> div.slided">
 <%#= @banners.inspect %>
 <% 
    i = 0
@@ -11,7 +11,8 @@
          setClass = ''
       end
 %>
-        <img src="/images/pics_banners/<%= b.imagename %>" data-url="/movie/view/<%= b.movie_id.to_s %>" data-trailer="<%= b.trailer %>" height="380" width="940" class="<%= setClass %>" />
+        <div style="background-image: url('/images/pics_banners/<%= b.imagename %>'); width: 940px; height: 380px" class="<%= setClass %> slided" data-url="/movie/view/<%= b.movie_id.to_s %>" data-trailer="<%= b.trailer %>"></div>
+        <!--img src="/images/pics_banners/<%= b.imagename %>" data-url="/movie/view/<%= b.movie_id.to_s %>" data-trailer="<%= b.trailer %>" height="380" width="940" class="<%= setClass %>" /-->
 <% end %>
         <div class="slider-nav">
             <div class="slider-l"></div>
@@ -27,3 +28,4 @@
         </div>
       </div>
       <div id="trailer" style="display:none;" href="#"></div>
+

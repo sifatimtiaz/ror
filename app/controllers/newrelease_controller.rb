@@ -8,7 +8,7 @@ class NewreleaseController < ConsumerController
   
   def index_new
     #@movies = Movie.find(:all, :order => "releasedate DESC", :limit => 10)  
-    @movies = Releaseorder.find (:all, :joins => "left join movies on releaseorders.movie_id = movies.id", :select => "releaseorders.*, movies.title, movies.synopsis, movies.postersmall, movies.postermed, movies.id", :order => "order_list ASC", :limit => 12)
+    @movies = Releaseorder.find (:all, :joins => "left join movies on releaseorders.movie_id = movies.id", :select => "releaseorders.*, movies.title, movies.synopsis, movies.postersmall, movies.postermed, movies.id", :order => "order_list ASC")
     
     @movies.map {|mov|
 	class << mov

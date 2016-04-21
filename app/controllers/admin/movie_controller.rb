@@ -12,8 +12,9 @@ class Admin::MovieController < Admin::AdminController
   
   @categories = Category.find(:all,:order => "category ASC")
   
-def list
-    @movie_pages, @movies = paginate (:movies, :order => 'title', :per_page => 20)
+  def list
+    # @movie_pages, @movies = paginate (:movies, :order => 'title', :per_page => 20)
+    @movies = Movie.find(:all,:order => "title")
   end
 
   def show

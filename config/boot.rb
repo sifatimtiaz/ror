@@ -1,4 +1,5 @@
 # Don't change this file. Configuration is done in config/environment.rb and config/environments/*.rb
+# require 'lib/htmlentities/lib/htmlentities'
 
 unless defined?(RAILS_ROOT)
   root_path = File.join(File.dirname(__FILE__), '..')
